@@ -5,14 +5,14 @@ var bodyParser = require('body-parser')
 const config = require('./config')
 const MongoClient = require('mongodb').MongoClient
 
-var users = require('./routes/users')
+var account = require('./routes/account')
 
 var app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/api/users', users)
+app.use('/api/account', account)
 
 MongoClient.connect(config.DB_CONNECTION_STRING, {
   promiseLibrary: Promise

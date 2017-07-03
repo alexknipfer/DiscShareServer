@@ -22,6 +22,7 @@ router.post('/register', (req, res) => {
     (err, r) => {
       if (err) {
         console.log('INSERT USER ERROR ', err)
+        res.end(err)
       } else {
         res.end('Added Successfully!')
       }
