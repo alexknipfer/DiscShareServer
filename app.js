@@ -18,6 +18,9 @@ MongoClient.connect(config.DB_CONNECTION_STRING, {
   promiseLibrary: Promise
 })
   .catch(err => console.error(err.stack))
-  .then(db => console.log('Database Connection Successful'))
+  .then(db => {
+    app.locals.db = db
+    console.log('Database Connection Successful')
+  })
 
 module.exports = app
