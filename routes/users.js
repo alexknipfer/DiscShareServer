@@ -3,10 +3,10 @@ var router = express.Router()
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  //console.log('hello')
-  res.json({
-    id: 1,
-    username: 'hello there'
+  const db = req.app.locals.db
+
+  var s = db.collection('users').find().toArray((err, docs) => {
+    res.send({ docs })
   })
 })
 
