@@ -1,5 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const config = require('../config')
 
 const router = express.Router()
 
@@ -30,18 +32,17 @@ router.post('/register', async (req, res, next) => {
   if (duplicateUser >= 1) {
     next(new Error('This username is already taken.'))
   } else {
-    usersCollection.insertOne(
-      { username: username, password: hashPass },
-      (err, r) => {
-        if (err) {
-          console.log('INSERT USER ERROR ', err)
-          res.end(err)
-        } else {
-          res.end('Added Successfully!')
-        }
-        db.close()
-      }
-    )
+    await usersCollection.insertOne({ username: username, password: hashPass })
+    const userAdded = await usersCollection.findOne({ username: username })
+
+    console.log(userAdded)
+    const token = jwt.sign(userAdded, config.JWT_SECRET, {
+      expiresIn: 60 * 60 * 24
+    })
+    console.log(token)
+    db.close()
+    res.send({ token: token })
+    res.end()
   }
 })
 
