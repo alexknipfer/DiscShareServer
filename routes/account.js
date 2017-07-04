@@ -5,9 +5,8 @@ const config = require('../config')
 
 const router = express.Router()
 
-/* GET users listing. */
 router.get('/', (req, res, next) => {
-  const db = req.app.locals.db
+  const { db } = req.app.locals
 
   var s = db.collection('users').find().toArray((err, docs) => {
     res.send({ docs })
