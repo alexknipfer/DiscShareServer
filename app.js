@@ -14,6 +14,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/api/account', account)
 
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).send(err.message)
+  next()
+})
+
 MongoClient.connect(config.DB_CONNECTION_STRING, {
   promiseLibrary: Promise
 })
