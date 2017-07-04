@@ -39,10 +39,7 @@ router.post('/register', async (req, res, next) => {
     const token = jwt.sign(userAdded, config.JWT_SECRET, {
       expiresIn: 60 * 60 * 24
     })
-    console.log(token)
-    db.close()
     res.send({ token: token })
-    res.end()
   }
 })
 
