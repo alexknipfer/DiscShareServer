@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   db.close()
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res, next) => {
   const { username, password } = req.body
   const { db } = req.app.locals
   const saltRounds = 10
@@ -23,18 +23,26 @@ router.post('/register', (req, res) => {
 
   const usersCollection = db.collection('users')
 
-  usersCollection.insertOne(
-    { username: username, password: hashPass },
-    (err, r) => {
-      if (err) {
-        console.log('INSERT USER ERROR ', err)
-        res.end(err)
-      } else {
-        res.end('Added Successfully!')
+  const duplicateUser = await usersCollection
+    .find({ username: username })
+    .count()
+
+  if (duplicateUser >= 1) {
+    next(new Error('This username is already taken.'))
+  } else {
+    usersCollection.insertOne(
+      { username: username, password: hashPass },
+      (err, r) => {
+        if (err) {
+          console.log('INSERT USER ERROR ', err)
+          res.end(err)
+        } else {
+          res.end('Added Successfully!')
+        }
+        db.close()
       }
-      db.close()
-    }
-  )
+    )
+  }
 })
 
 module.exports = router
