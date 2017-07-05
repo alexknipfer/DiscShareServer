@@ -26,6 +26,7 @@ MongoClient.connect(config.DB_CONNECTION_STRING, {
   .then(db => {
     app.locals.db = db
     console.log('Database Connection Successful')
+    console.log(`> Server now running on http://localhost:${app.get('port')}`)
   })
 
 module.exports = app
