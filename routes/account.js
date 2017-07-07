@@ -42,4 +42,30 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
+router.post('/loginWithUsername', async (req, res, next) => {
+  const { username, password } = req.body
+  const { db } = req.app.locals
+  const saltRounds = 10
+
+  const usersCollection = db.collection('users')
+
+  const user = await usersCollection.findOne({ username: username })
+
+  if (user) {
+    const found = bcrypt.compareSync(password, user.password)
+
+    if (found) {
+      const token = jwt.sign(user, config.JWT_SECRET, {
+        expiresIn: 60 * 60 * 24
+      })
+      res.send({ token: token })
+      res.end()
+    } else {
+      next(new Error('The password you entered was incorrect.'))
+    }
+  } else {
+    next(new Error('The username you entered was incorrect'))
+  }
+})
+
 module.exports = router
