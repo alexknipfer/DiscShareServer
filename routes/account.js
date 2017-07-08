@@ -5,16 +5,6 @@ const config = require('../config')
 
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
-  const { db } = req.app.locals
-
-  var s = db.collection('users').find().toArray((err, docs) => {
-    res.send({ docs })
-  })
-
-  db.close()
-})
-
 router.post('/register', async (req, res, next) => {
   const { username, password } = req.body
   const { db } = req.app.locals
@@ -38,7 +28,7 @@ router.post('/register', async (req, res, next) => {
     const token = jwt.sign(userAdded, config.JWT_SECRET, {
       expiresIn: 60 * 60 * 24
     })
-    res.send({ token: token })
+    res.send({ token })
   }
 })
 
@@ -58,7 +48,7 @@ router.post('/loginWithUsername', async (req, res, next) => {
       const token = jwt.sign(user, config.JWT_SECRET, {
         expiresIn: 60 * 60 * 24
       })
-      res.send({ token: token })
+      res.send({ token })
       res.end()
     } else {
       next(new Error('The password you entered was incorrect.'))
@@ -66,6 +56,15 @@ router.post('/loginWithUsername', async (req, res, next) => {
   } else {
     next(new Error('The username you entered was incorrect'))
   }
+})
+
+router.post('/getUserData', async (req, res, next) => {
+  const { token } = req.body
+  const { db } = req.app.locals
+
+  const user = jwt.decode(token, config.JWT_SECRET)
+  console.log('USER: ', user)
+  res.send({ user })
 })
 
 module.exports = router
