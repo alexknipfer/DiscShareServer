@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
+const ObjectId = require('mongodb').ObjectID
 
 const router = express.Router()
 
@@ -69,6 +70,28 @@ router.post('/getUserData', async (req, res, next) => {
   const user = jwt.decode(token, config.JWT_SECRET)
   console.log('USER: ', user)
   res.send({ user })
+})
+
+router.post('/editAccount', async (req, res, next) => {
+  const { userId, email, firstName, location } = req.body
+  const { db } = req.app.locals
+
+  const userCollection = db.collection('users')
+
+  await userCollection.updateOne(
+    { _id: new ObjectId(userId) },
+    { $set: { email } }
+  )
+
+  const updatedUser = await userCollection.findOne({
+    _id: new ObjectId(userId)
+  })
+
+  const token = jwt.sign(updatedUser, config.JWT_SECRET, {
+    expiresIn: 60 * 60 * 24
+  })
+
+  res.send({ token })
 })
 
 module.exports = router
