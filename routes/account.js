@@ -6,7 +6,7 @@ const config = require('../config')
 const router = express.Router()
 
 router.post('/register', async (req, res, next) => {
-  const { username, password } = req.body
+  const { email, username, password } = req.body
   const { db } = req.app.locals
   const saltRounds = 10
 
@@ -21,7 +21,11 @@ router.post('/register', async (req, res, next) => {
   if (duplicateUser >= 1) {
     next(new Error('This username is already taken.'))
   } else {
-    await usersCollection.insertOne({ username: username, password: hashPass })
+    await usersCollection.insertOne({
+      email: email,
+      username: username,
+      password: hashPass
+    })
     const userAdded = await usersCollection.findOne({ username: username })
 
     console.log(userAdded)
