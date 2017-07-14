@@ -3,17 +3,23 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "deploy": "now"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jsonwebtoken": "^7.4.1",
     "mongodb": "^2.2.29",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
+  },
+  "now": {
+    "files": ["./config.js", "./bin/www"]
   }
 }

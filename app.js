@@ -1,7 +1,8 @@
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const config = require('./config')
 const MongoClient = require('mongodb').MongoClient
 
@@ -11,6 +12,7 @@ var app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
 
 app.use('/api/account', account)
 
