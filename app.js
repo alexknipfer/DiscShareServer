@@ -7,6 +7,7 @@ const config = require('./config')
 const MongoClient = require('mongodb').MongoClient
 
 var account = require('./routes/account')
+var upload = require('./routes/upload')
 
 var app = express()
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use('/api/account', account)
+app.use('/api/upload', upload)
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).send(err.message)
