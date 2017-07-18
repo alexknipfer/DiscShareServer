@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
-const { GraphQL } = require('graphql')
 
 const registerTypeDef = `
   extend type Mutation {
