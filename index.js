@@ -1,20 +1,8 @@
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const bodyParser = require('body-parser')
-const { buildSchema } = require('graphql')
+const schema = require('./schemas/index')
 const cors = require('cors')
-
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
-
-const root = {
-  hello: () => {
-    return 'Hello World'
-  }
-}
 
 const app = express()
 
@@ -27,7 +15,6 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema: schema,
-    rootValue: root,
     graphiql: true
   })
 )
