@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
+    "start": "node index.js",
+    "micro": "micro index.js",
     "deploy": "now"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "express": "~4.15.2",
     "express-graphql": "^0.6.6",
     "graphql": "^0.10.5",
+    "graphql-tools": "^1.1.0",
     "jsonwebtoken": "^7.4.1",
     "micro": "^7.3.3",
     "micro-cors": "^0.0.4",
@@ -26,9 +28,6 @@
     "serve-favicon": "~2.4.2"
   },
   "now": {
-    "files": [
-      "./config.js",
-      "./bin/www"
-    ]
+    "files": ["./config.js", "./bin/www"]
   }
 }
