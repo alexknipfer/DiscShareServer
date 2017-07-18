@@ -1,7 +1,7 @@
 const express = require('express')
-const graphqlHTTP = require('express-graphql')
+const { graphqlExpress, graphiqlConnect } = require('graphql-server-express')
 const bodyParser = require('body-parser')
-const schema = require('./schemas/index')
+const rootSchema = require('./schemas/index')
 const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const config = require('./config')
@@ -14,16 +14,17 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-app.use(
-  '/graphql',
-  graphqlHTTP(req => ({
-    schema: schema,
+
+app.use('/graphql', graphqlExpress(req => ({
+    schema: rootSchema,
     rootValue: {
       db: req.app.locals.db
-    },
-    graphiql: true
-  }))
-)
+    }
+})))
+
+app.use('/graphiql', graphiqlConnect({
+     endpointURL: '/graphql'
+ }))
 
 MongoClient.connect(config.DB_CONNECTION_STRING, {
   promiseLibrary: Promise
@@ -34,6 +35,6 @@ MongoClient.connect(config.DB_CONNECTION_STRING, {
     console.log('Database connection successful.')
     app.listen(port, err => {
       if (err) throw err
-      console.log(`Running a GraphQL API server at ${port}`)
+      console.log(`> Server now running at http://localhost:${port}`)
     })
   })
