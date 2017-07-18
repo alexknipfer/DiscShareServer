@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "micro": "micro index.js",
     "deploy": "now"
   },
