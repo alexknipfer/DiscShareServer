@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
+const { GraphQL } = require('graphql')
 
 const registerTypeDef = `
   extend type Mutation {
@@ -16,7 +17,7 @@ const registerResolver = {
         .find({ username: username })
         .count()
 
-      if (duplicateUser >= 1) return 'User exists'
+      if (duplicateUser >= 1) throw new Error('User already exists.')
       else {
         const saltRounds = 10
         const hash = bcrypt.hashSync(password, saltRounds)
