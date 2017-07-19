@@ -1,7 +1,9 @@
 const { makeExecutableSchema } = require('graphql-tools')
 const { merge } = require('lodash')
-const testSchema = require('./testSchema')
+const sharedTypes = require('./sharedTypes')
 const register = require('./register')
+const login = require('./login')
+const getUser = require('./getUser')
 
 const rootSchema = `
   type Query {
@@ -26,11 +28,19 @@ const rootResolvers = {
 }
 
 const schema = makeExecutableSchema({
-  typeDefs: [rootSchema, testSchema.testTypeDef, register.registerTypeDef],
+  typeDefs: [
+    rootSchema,
+    sharedTypes.sharedTypesTypeDef,
+    register.registerTypeDef,
+    login.loginTypeDef,
+    getUser.getUserTypeDef
+  ],
   resolvers: merge(
     rootResolvers,
-    testSchema.testResolver,
-    register.registerResolver
+    sharedTypes.sharedTypesResolver,
+    register.registerResolver,
+    login.loginResolver,
+    getUser.getUserResolver
   )
 })
 
