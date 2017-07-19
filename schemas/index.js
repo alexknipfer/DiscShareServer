@@ -4,7 +4,7 @@ const sharedTypes = require('./sharedTypes')
 const register = require('./register')
 const login = require('./login')
 const getUser = require('./getUser')
-const editUser = require('./editUser')
+const editAccount = require('./editAccount')
 
 const rootSchema = `
   type Query {
@@ -35,7 +35,7 @@ const schema = makeExecutableSchema({
     register.registerTypeDef,
     login.loginTypeDef,
     getUser.getUserTypeDef,
-    editUser.editUserTypeDef
+    editAccount.editAccountTypeDef
   ],
   resolvers: merge(
     rootResolvers,
@@ -43,7 +43,7 @@ const schema = makeExecutableSchema({
     register.registerResolver,
     login.loginResolver,
     getUser.getUserResolver,
-    editUser.editUserResolver
+    editAccount.editAccountResolver
   )
 })
 

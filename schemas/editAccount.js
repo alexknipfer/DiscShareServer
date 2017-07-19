@@ -2,15 +2,15 @@ const jwt = require('jsonwebtoken')
 const config = require('../config')
 const ObjectId = require('mongodb').ObjectId
 
-const editUserTypeDef = `
+const editAccountTypeDef = `
     extend type Mutation {
-        editUser(userId: ID, email: String!, firstName: String!): String
+        editAccount(userId: ID, email: String!, firstName: String!, location: String!): String
     }
 `
 
-const editUserResolver = {
+const editAccountResolver = {
     Mutation: {
-        editUser: async ({ db }, { userId, email, firstName }) => {
+        editAccount: async ({ db }, { userId, email, firstName }) => {
             const userCollection = db.collection('users')
 
             await userCollection.updateOne(
@@ -32,6 +32,6 @@ const editUserResolver = {
 }
 
 module.exports = {
-    editUserTypeDef,
-    editUserResolver
+    editAccountTypeDef,
+    editAccountResolver
 }
