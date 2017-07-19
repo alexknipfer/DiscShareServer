@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config')
+const ObjectId = require('mongodb').ObjectId
 
 const editUserTypeDef = `
     extend type Mutation {
@@ -14,7 +15,7 @@ const editUserResolver = {
 
             await userCollection.updateOne(
                 { _id: new ObjectId(userId) },
-                { $set: { emai } }
+                { $set: { email } }
             )
 
             const updatedUser = await userCollection.findOne({
