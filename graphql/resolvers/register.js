@@ -1,12 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../config')
-
-const registerTypeDef = `
-  extend type Mutation {
-    register(email: String!, username: String!, password: String!): String
-  }
-`
+const config = require('../../config')
 
 const registerResolver = {
   Mutation: {
@@ -37,7 +31,4 @@ const registerResolver = {
   }
 }
 
-module.exports = {
-  registerTypeDef,
-  registerResolver
-}
+module.exports = registerResolver

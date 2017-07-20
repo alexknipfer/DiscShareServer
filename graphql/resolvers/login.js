@@ -1,12 +1,6 @@
 const bcyrpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../config')
-
-const loginTypeDef = `
-  extend type Mutation {
-    login(username: String!, password: String!): String
-  }
-`
+const config = require('../../config')
 
 const loginResolver = {
   Mutation: {
@@ -32,7 +26,4 @@ const loginResolver = {
   }
 }
 
-module.exports = {
-  loginTypeDef,
-  loginResolver
-}
+module.exports = loginResolver

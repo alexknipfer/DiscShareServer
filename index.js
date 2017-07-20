@@ -1,7 +1,7 @@
 const express = require('express')
 const { graphqlExpress, graphiqlConnect } = require('graphql-server-express')
 const bodyParser = require('body-parser')
-const rootSchema = require('./schemas/index')
+const rootSchema = require('./graphql')
 const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const config = require('./config')
@@ -14,17 +14,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-
-app.use('/graphql', graphqlExpress(req => ({
+app.use(
+  '/graphql',
+  graphqlExpress(req => ({
     schema: rootSchema,
     rootValue: {
       db: req.app.locals.db
     }
-})))
+  }))
+)
 
-app.use('/graphiql', graphiqlConnect({
-     endpointURL: '/graphql'
- }))
+app.use(
+  '/graphiql',
+  graphiqlConnect({
+    endpointURL: '/graphql'
+  })
+)
 
 MongoClient.connect(config.DB_CONNECTION_STRING, {
   promiseLibrary: Promise

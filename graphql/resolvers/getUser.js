@@ -1,11 +1,5 @@
 const jwt = require('jsonwebtoken')
-const config = require('../config')
-
-const getUserTypeDef = `
-  extend type Query {
-    getUser(accesstoken: String): User
-  }
-`
+const config = require('../../config')
 
 const getUserResolver = {
   Query: {
@@ -19,7 +13,4 @@ const getUserResolver = {
   }
 }
 
-module.exports = {
-  getUserTypeDef,
-  getUserResolver
-}
+module.exports = getUserResolver
