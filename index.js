@@ -3,6 +3,7 @@ const { graphqlExpress, graphiqlConnect } = require('graphql-server-express')
 const bodyParser = require('body-parser')
 const rootSchema = require('./graphql')
 const cors = require('cors')
+const helmet = require('helmet')
 const MongoClient = require('mongodb').MongoClient
 const config = require('./config')
 
@@ -12,6 +13,7 @@ const port = 4000
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(helmet())
 app.use(cors())
 
 app.use(
