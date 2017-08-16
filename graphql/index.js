@@ -1,12 +1,14 @@
 const { makeExecutableSchema } = require('graphql-tools')
 const { merge } = require('lodash')
 
+const addDiscSchema = require('./schemas/addDisc')
 const editAccountSchema = require('./schemas/editAccount')
 const getUserSchema = require('./schemas/getUser')
 const loginSchema = require('./schemas/login')
 const registerSchema = require('./schemas/register')
 const sharedTypesSchema = require('./schemas/sharedTypes')
 
+const addDiscResolver = require('./resolvers/addDisc')
 const editAccountResolver = require('./resolvers/editAccount')
 const getUserResolver = require('./resolvers/getUser')
 const loginResolver = require('./resolvers/login')
@@ -38,6 +40,7 @@ const rootResolvers = {
 const schema = makeExecutableSchema({
   typeDefs: [
     rootSchema,
+    addDiscSchema,
     editAccountSchema,
     getUserSchema,
     loginSchema,
@@ -46,6 +49,7 @@ const schema = makeExecutableSchema({
   ],
   resolvers: merge(
     rootResolvers,
+    addDiscResolver,
     editAccountResolver,
     getUserResolver,
     loginResolver,
