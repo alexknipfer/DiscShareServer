@@ -1,9 +1,14 @@
 const addDiscResolver = {
   Mutation: {
-    addDisc: async ({ db }, { discName, discLocation, nameOnDisc }) => {
+    addDisc: async (
+      { db },
+      { discName, locationDescription, latitude, longitude, nameOnDisc }
+    ) => {
       const data = {
         discName,
-        discLocation,
+        locationDescription,
+        latitude,
+        longitude,
         nameOnDisc
       }
 

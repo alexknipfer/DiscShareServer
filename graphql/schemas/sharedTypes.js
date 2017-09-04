@@ -9,9 +9,9 @@ const sharedTypesTypeDef = `
   type Disc {
     id: ID
     name: String
-    location: String
-    lng: String
-    lat: String
+    locationDescription: String
+    latitude: String
+    longitude: String
     img: String
   }
 `
