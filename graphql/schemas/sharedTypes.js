@@ -8,11 +8,11 @@ const sharedTypesTypeDef = `
 
   type Disc {
     id: ID
-    name: String
+    discName: String
     locationDescription: String
     latitude: String
     longitude: String
-    img: String
+    nameOnDisc: String
   }
 `
 
