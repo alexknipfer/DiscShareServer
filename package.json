@@ -8,15 +8,14 @@
     "deploy": "now"
   },
   "dependencies": {
+    "apollo-server-express": "^1.1.2",
     "bcrypt": "^1.0.2",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
-    "express-graphql": "^0.6.6",
     "graphql": "^0.10.5",
-    "graphql-server-express": "^1.0.2",
     "graphql-tools": "^1.1.0",
     "helmet": "^3.8.0",
     "jsonwebtoken": "^7.4.1",
