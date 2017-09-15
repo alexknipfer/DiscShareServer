@@ -5,6 +5,7 @@ const getUserResolver = {
   Query: {
     getUser: ({ db }, { accesstoken }) => {
       const user = jwt.decode(accesstoken, config.JWT_SECRET)
+      console.log('USER: ', user)
       return user
     }
   },

@@ -1,5 +1,5 @@
 const express = require('express')
-const { graphqlExpress, graphiqlConnect } = require('graphql-server-express')
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
 const rootSchema = require('./graphql')
 const cors = require('cors')
@@ -12,12 +12,12 @@ const app = express()
 const port = 4000
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(helmet())
 app.use(cors())
 
 app.use(
   '/graphql',
+  bodyParser.json(),
   graphqlExpress(req => ({
     schema: rootSchema,
     rootValue: {
@@ -28,7 +28,7 @@ app.use(
 
 app.use(
   '/graphiql',
-  graphiqlConnect({
+  graphiqlExpress({
     endpointURL: '/graphql'
   })
 )
