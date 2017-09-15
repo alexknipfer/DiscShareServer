@@ -1,7 +1,7 @@
 const discsResolver = {
   Query: {
     discs: async ({ db }) => {
-      return db
+      return await db
         .collection('discs')
         .find()
         .toArray()
