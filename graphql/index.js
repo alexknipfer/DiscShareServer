@@ -7,6 +7,7 @@ const getUserSchema = require('./schemas/getUser')
 const loginSchema = require('./schemas/login')
 const registerSchema = require('./schemas/register')
 const discsSchema = require('./schemas/discs')
+const discsByLocationSchema = require('./schemas/discsByLocation')
 const sharedTypesSchema = require('./schemas/sharedTypes')
 
 const addDiscResolver = require('./resolvers/addDisc')
@@ -15,6 +16,7 @@ const getUserResolver = require('./resolvers/getUser')
 const loginResolver = require('./resolvers/login')
 const registerResolver = require('./resolvers/register')
 const discsResolver = require('./resolvers/discs')
+const discsByLocationResolver = require('./resolvers/discsByLocation')
 const sharedTypesResolver = require('./resolvers/sharedTypes')
 
 const rootSchema = `
@@ -48,6 +50,7 @@ const schema = makeExecutableSchema({
     loginSchema,
     registerSchema,
     discsSchema,
+    discsByLocationSchema,
     sharedTypesSchema
   ],
   resolvers: merge(
@@ -58,6 +61,7 @@ const schema = makeExecutableSchema({
     loginResolver,
     registerResolver,
     discsResolver,
+    discsByLocationResolver,
     sharedTypesResolver
   )
 })
