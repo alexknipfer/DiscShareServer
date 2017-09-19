@@ -10,9 +10,13 @@ const sharedTypesTypeDef = `
     id: ID
     discName: String
     locationDescription: String
-    latitude: String
-    longitude: String
+    location: Location
     nameOnDisc: String
+  }
+
+  type Location {
+    type: String,
+    coordinates: [Float]
   }
 `
 
