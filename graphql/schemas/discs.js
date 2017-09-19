@@ -1,7 +1,7 @@
-const platesTypeDef = `
+const discsTypeDef = `
   extend type Query {
     discs: [Disc]
   }
 `
 
-module.exports = platesTypeDef
+module.exports = discsTypeDef
