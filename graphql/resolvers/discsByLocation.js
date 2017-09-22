@@ -2,8 +2,8 @@ const discsByLocationResolver = {
   Query: {
     discsByLocation: async ({ db }, { longitude, latitude }) => {
       await db.collection('discs').createIndex({ location: '2dsphere' })
-      // await db.collection('discs').ensureIndex({location: '2dsphere'})
-      const discs = await db.collection('discs').find({
+      
+      return await db.collection('discs').find({
         location: {
           $near: {
             $geometry: {
@@ -15,8 +15,6 @@ const discsByLocationResolver = {
           }
         }
       }).toArray()
-
-      console.log('DISCS: ', discs)
     }
   }
 }

@@ -9,7 +9,7 @@ const addDiscResolver = {
         locationDescription,
         location: {
           type: 'Point',
-          coordiates: [parseFloat(longitude), parseFloat(latitude)]
+          coordinates: [parseFloat(longitude), parseFloat(latitude)]
         },
         nameOnDisc
       }
