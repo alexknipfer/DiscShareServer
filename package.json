@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node ./index.js",
-    "deploy": "now"
+    "deploy": "now",
+    "format":
+      "prettier --single-quote --no-semi --trailing-comma none --write \"graphql/**/*.js\""
   },
   "dependencies": {
     "apollo-server-express": "^1.1.2",
@@ -24,12 +26,11 @@
     "serve-favicon": "~2.4.2"
   },
   "now": {
-    "files": [
-      "./config.js"
-    ]
+    "files": ["./config.js"]
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prettier": "^1.7.0"
   },
   "engines": {
     "node": ">= 7.6.0"
