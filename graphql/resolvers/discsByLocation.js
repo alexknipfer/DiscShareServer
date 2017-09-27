@@ -1,6 +1,6 @@
 const discsByLocationResolver = {
   Query: {
-    discsByLocation: async ({ db }, { longitude, latitude }) => {
+    discsByLocation: async ({ db }, { longitude, latitude, radius }) => {
       await db.collection('discs').createIndex({ location: '2dsphere' })
 
       return await db
@@ -13,7 +13,7 @@ const discsByLocationResolver = {
                 coordinates: [parseFloat(longitude), parseFloat(latitude)]
               },
               $minDistance: 0,
-              $maxDistance: 100
+              $maxDistance: radius * 1609.34
             }
           }
         })
