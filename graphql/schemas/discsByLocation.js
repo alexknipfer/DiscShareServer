@@ -1,6 +1,6 @@
 const discsByLocationTypeDef = `
     extend type Query {
-        discsByLocation(longitude: String, latitude: String): [Disc]
+        discsByLocation(longitude: String, latitude: String, radius: Int): [Disc]
     }
 `
 
