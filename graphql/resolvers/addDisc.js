@@ -2,7 +2,7 @@ const addDiscResolver = {
   Mutation: {
     addDisc: async (
       { db },
-      { discName, locationDescription, longitude, latitude, nameOnDisc }
+      { discName, locationDescription, longitude, latitude, nameOnDisc, userId }
     ) => {
       const data = {
         discName,
@@ -11,7 +11,8 @@ const addDiscResolver = {
           type: 'Point',
           coordinates: [parseFloat(longitude), parseFloat(latitude)]
         },
-        nameOnDisc
+        nameOnDisc,
+        createdBy: userId
       }
 
       await db.collection('discs').insert(data)
