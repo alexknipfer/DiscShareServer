@@ -1,6 +1,6 @@
 const discsTypeDef = `
   extend type Query {
-    discs: [Disc]
+    discs(userId: String): [Disc]
   }
 `
 

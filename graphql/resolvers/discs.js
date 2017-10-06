@@ -1,9 +1,9 @@
 const discsResolver = {
   Query: {
-    discs: ({ db }) => {
+    discs: ({ db }, { userId }) => {
       return db
         .collection('discs')
-        .find()
+        .find({ createdBy: userId })
         .toArray()
     }
   }
