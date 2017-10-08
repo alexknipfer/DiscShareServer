@@ -1,3 +1,7 @@
+const mailgunClient = require('../../clients/MailgunClient')
+
+const mailgun = new mailgunClient()
+
 const addDiscResolver = {
   Mutation: {
     addDisc: async (
@@ -16,6 +20,12 @@ const addDiscResolver = {
       }
 
       await db.collection('discs').insert(data)
+      await mailgun.sendEmail(
+        'DiscShare <robot@discshare.com>',
+        'alexanderknipfer@gmail.com',
+        'Added Disc',
+        'You have added a disc successfully'
+      )
       return data
     }
   }
