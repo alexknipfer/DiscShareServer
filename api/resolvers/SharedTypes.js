@@ -1,4 +1,4 @@
-const sharedTypesResolver = {
+const SharedTypes = {
   User: {
     id: ({ _id }) => _id
   },
@@ -7,4 +7,4 @@ const sharedTypesResolver = {
   }
 }
 
-module.exports = sharedTypesResolver
+module.exports = SharedTypes

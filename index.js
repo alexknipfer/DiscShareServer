@@ -2,7 +2,7 @@ const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-const rootSchema = require('./graphql')
+const schema = require('./api')
 const cors = require('cors')
 const helmet = require('helmet')
 const MongoClient = require('mongodb').MongoClient
@@ -19,7 +19,7 @@ app.use(
   '/graphql',
   bodyParser.json(),
   graphqlExpress(req => ({
-    schema: rootSchema,
+    schema,
     rootValue: {
       db: req.app.locals.db
     }
