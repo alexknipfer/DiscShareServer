@@ -1,4 +1,4 @@
-const mailgunClient = require('../../clients/MailgunClient')
+const mailgunClient = require('../../lib/clients/MailgunClient')
 
 const mailgun = new mailgunClient()
 
