@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../../config')
 
 const registerResolver = {
   Mutation: {
@@ -22,7 +21,7 @@ const registerResolver = {
         }
         await userCollection.insertOne(data)
         const newUser = await userCollection.findOne({ username: username })
-        const token = jwt.sign(newUser, config.JWT_SECRET, {
+        const token = jwt.sign(newUser, process.env.JWT_SECRET, {
           expiresIn: 60 * 60 * 24
         })
         return token

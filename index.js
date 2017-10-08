@@ -1,11 +1,11 @@
 const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 const rootSchema = require('./graphql')
 const cors = require('cors')
 const helmet = require('helmet')
 const MongoClient = require('mongodb').MongoClient
-const config = require('./config')
 
 const app = express()
 
@@ -33,7 +33,7 @@ app.use(
   })
 )
 
-MongoClient.connect(config.DB_CONNECTION_STRING, {
+MongoClient.connect(process.env.DB_CONNECTION_STRING, {
   promiseLibrary: Promise
 })
   .catch(err => console.error(err.stack))

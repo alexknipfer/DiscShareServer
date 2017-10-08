@@ -1,6 +1,5 @@
 const bcyrpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../../config')
 
 const loginResolver = {
   Mutation: {
@@ -12,7 +11,7 @@ const loginResolver = {
         const found = bcyrpt.compareSync(password, user.password)
 
         if (found) {
-          const token = jwt.sign(user, config.JWT_SECRET, {
+          const token = jwt.sign(user, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24
           })
           return token

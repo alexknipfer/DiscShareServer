@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const config = require('../../config')
 const ObjectId = require('mongodb').ObjectId
 
 const editAccountResolver = {
@@ -16,7 +15,7 @@ const editAccountResolver = {
         _id: new ObjectId(userId)
       })
 
-      const token = jwt.sign(updatedUser, config.JWT_SECRET, {
+      const token = jwt.sign(updatedUser, process.env.JWT_SECRET, {
         expiresIn: 60 * 60 * 24
       })
 
