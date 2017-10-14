@@ -5,6 +5,7 @@ const Mutation = `
     login(username: String!, password: String!): String
     register(email: String!, username: String!, password: String!): String
     sendResetPasswordEmail(email: String!): Boolean
+    resetPassword(password: String!, token: String!): String
   }
 `
 
