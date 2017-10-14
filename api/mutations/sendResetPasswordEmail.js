@@ -6,7 +6,7 @@ const mailgunClient = require('../../lib/clients/MailgunClient')
 
 const mailgun = new mailgunClient()
 
-const resetPasswordEmail = async ({ db }, { email }) => {
+const sendResetPasswordEmail = async ({ db }, { email }) => {
   const userCollection = db.collection('users')
 
   const user = await userCollection.findOne({
@@ -39,9 +39,9 @@ const resetPasswordEmail = async ({ db }, { email }) => {
     text: `Click the following link to reset your password. ${passwordResetUrl}`
   }
 
-  // await mailgun.sendEmail(messageConfig)
+  await mailgun.sendEmail(messageConfig)
 
   return true
 }
 
-module.exports = resetPasswordEmail
+module.exports = sendResetPasswordEmail
