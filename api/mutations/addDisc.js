@@ -18,12 +18,7 @@ const addDisc = async (
   }
 
   await db.collection('discs').insert(data)
-  await mailgun.sendEmail(
-    'DiscShare <robot@discshare.com>',
-    'alexanderknipfer@gmail.com',
-    'Added Disc',
-    'You have added a disc successfully'
-  )
+
   return data
 }
 
