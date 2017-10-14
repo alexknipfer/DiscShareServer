@@ -4,6 +4,7 @@ const Mutation = `
     editAccount(userId: ID, email: String!, firstName: String!, location: String!): String
     login(username: String!, password: String!): String
     register(email: String!, username: String!, password: String!): String
+    resetPasswordEmail(email: String!): Boolean
   }
 `
 

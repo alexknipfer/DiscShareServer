@@ -4,6 +4,8 @@ const User = `
     email: String
     username: String
     password: String
+    passwordResetToken: String
+    passwordResetExpiration: String
   }
 `
 
