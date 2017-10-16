@@ -4,6 +4,7 @@ const login = require('../mutations/login')
 const register = require('../mutations/register')
 const sendResetPasswordEmail = require('../mutations/sendResetPasswordEmail')
 const resetPassword = require('../mutations/resetPassword')
+const uploadProfileImage = require('../mutations/uploadProfileImage')
 
 const Mutation = {
   addDisc,
@@ -11,7 +12,8 @@ const Mutation = {
   login,
   register,
   sendResetPasswordEmail,
-  resetPassword
+  resetPassword,
+  uploadProfileImage
 }
 
 module.exports = Mutation
