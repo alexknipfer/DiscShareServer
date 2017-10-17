@@ -1,6 +1,6 @@
 const aws = require('aws-sdk')
 
-const uploadProfileImage = async ({ db }, { filename, filetype }) => {
+const signS3 = async ({ db }, { filename, filetype }) => {
   const s3Bucket = process.env.S3_BUCKET
 
   const s3 = new aws.S3({
@@ -25,4 +25,4 @@ const uploadProfileImage = async ({ db }, { filename, filetype }) => {
   }
 }
 
-module.exports = uploadProfileImage
+module.exports = signS3

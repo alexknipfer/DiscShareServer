@@ -6,7 +6,7 @@ const Mutation = `
     register(email: String!, username: String!, password: String!): String
     sendResetPasswordEmail(email: String!): Boolean
     resetPassword(password: String!, token: String!): String
-    uploadProfileImage(filename: String!, filetype: String!): S3Payload!
+    signS3(filename: String!, filetype: String!): S3Payload!
   }
 `
 
