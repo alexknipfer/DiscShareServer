@@ -13,7 +13,7 @@ const signS3 = async ({ db }, { filename, filetype }) => {
     Key: filename,
     Expires: 60,
     ContentType: filetype,
-    ACL: 'public-react'
+    ACL: 'public-read'
   }
 
   const signedRequest = await s3.getSignedUrl('putObject', s3Params)
