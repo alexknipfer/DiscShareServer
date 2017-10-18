@@ -1,12 +1,15 @@
 const jwt = require('jsonwebtoken')
 const ObjectId = require('mongodb').ObjectId
 
-const editAccount = async ({ db }, { userId, email, firstName }) => {
+const editAccount = async (
+  { db },
+  { userId, email, firstName, profileImage }
+) => {
   const userCollection = db.collection('users')
 
   await userCollection.updateOne(
     { _id: new ObjectId(userId) },
-    { $set: { email } }
+    { $set: { email, profileImage } }
   )
 
   const updatedUser = await userCollection.findOne({
