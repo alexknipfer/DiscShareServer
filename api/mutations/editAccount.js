@@ -9,7 +9,7 @@ const editAccount = async (
 
   await userCollection.updateOne(
     { _id: new ObjectId(userId) },
-    { $set: { email, profileImage } }
+    { $set: { email, firstName, profileImage } }
   )
 
   const updatedUser = await userCollection.findOne({
