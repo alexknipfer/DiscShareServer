@@ -6,6 +6,7 @@ const User = `
     password: String
     passwordResetToken: String
     passwordResetExpiration: String
+    firstName: String
     profileImage: String
   }
 `
