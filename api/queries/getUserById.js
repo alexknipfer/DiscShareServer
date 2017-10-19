@@ -5,7 +5,7 @@ const getUserById = async ({ db }, { userId }) => {
     .collection('users')
     .findOne({ _id: new ObjectId(userId) })
 
-  console.log('USER in getUserById: ', user)
+  return user
 }
 
 module.exports = getUserById

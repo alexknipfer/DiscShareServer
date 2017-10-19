@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId
 
 const editAccount = async (
   { db },
-  { userId, email, firstName, profileImage }
+  { userId, email, firstName, location, profileImage }
 ) => {
   const userCollection = db.collection('users')
 
