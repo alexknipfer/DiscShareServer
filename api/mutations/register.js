@@ -15,7 +15,9 @@ const register = async ({ db }, { email, username, password }) => {
     const data = {
       email,
       username,
-      password: hash
+      password: hash,
+      profileImage:
+        'https://s3.us-east-2.amazonaws.com/disc-share/profileImages/elliot.jpg'
     }
     await userCollection.insertOne(data)
     const newUser = await userCollection.findOne({ username: username })
