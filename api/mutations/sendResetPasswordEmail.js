@@ -31,7 +31,7 @@ const sendResetPasswordEmail = async ({ db }, { email }) => {
     }
   )
 
-  const passwordResetUrl = `http://localhost:3000/resetPassword?token=${passwordResetToken}`
+  const passwordResetUrl = `http://client.now.sh/resetPassword?token=${passwordResetToken}`
 
   const messageConfig = {
     to: email,
