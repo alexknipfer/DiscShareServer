@@ -48,14 +48,15 @@ MongoClient.connect(process.env.DB_CONNECTION_STRING, {
   .then(() => {
     const ws = createServer(app)
 
-    ws.listen(port, () => {
-      console.log(`> Server now running at http://localhost:${port}`)
+    ws.listen(port, err => {
+      if (err) throw err
 
       new SubscriptionServer(
         {
           execute,
           subscribe,
-          schema
+          schema,
+          onConnect: () => console.log('Client connected')
         },
         {
           server: ws,
@@ -63,8 +64,6 @@ MongoClient.connect(process.env.DB_CONNECTION_STRING, {
         }
       )
     })
-  })
 
-// app.listen(port, err => {
-//   if (err) throw err
-// })
+    console.log(`> Server now running at http://localhost:${port}`)
+  })
