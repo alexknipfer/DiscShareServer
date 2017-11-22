@@ -1,8 +1,7 @@
-const { PubSub } = require('graphql-subscriptions')
+const socket = require('../../lib/socket')
 const mailgunClient = require('../../lib/clients/MailgunClient')
 
 const mailgun = new mailgunClient()
-const pubsub = new PubSub()
 
 const addDisc = async (
   { db },
@@ -21,7 +20,7 @@ const addDisc = async (
 
   await db.collection('discs').insert(data)
 
-  pubsub.publish('discAdded', { discAdded: data, createdBy: data.createdBy })
+  socket.publish('DISC_ADDED', { discAdded: data, createdBy: data.createdBy })
 
   return data
 }

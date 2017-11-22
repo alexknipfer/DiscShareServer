@@ -1,11 +1,11 @@
-const { PubSub, withFilter } = require('graphql-subscriptions')
-
-const pubsub = new PubSub()
+const socket = require('../../lib/socket')
+const { withFilter } = require('graphql-subscriptions')
 
 const discAdded = () => {
   subscribe: withFilter(
-    () => pubsub.asyncIterator('discAdded'),
+    () => socket.asyncIterator('DISC_ADDED'),
     (payload, variables) => {
+      console.log('payload: ', payload)
       return payload.createdBy === variables.createdBy
     }
   )
