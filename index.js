@@ -1,5 +1,8 @@
 const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
+const { execute, subscribe } = require('graphql')
+const { createServer } = require('http')
+const { SubscriptionServer } = require('subscriptions-transport-ws')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const schema = require('./api')
@@ -29,7 +32,8 @@ app.use(
 app.use(
   '/graphiql',
   graphiqlExpress({
-    endpointURL: '/graphql'
+    endpointURL: '/graphql',
+    subscriptionsEndpoint: 'ws://localhost:4000/subscriptions'
   })
 )
 
@@ -40,8 +44,27 @@ MongoClient.connect(process.env.DB_CONNECTION_STRING, {
   .then(db => {
     app.locals.db = db
     console.log('Database connection successful.')
-    app.listen(port, err => {
-      if (err) throw err
+  })
+  .then(() => {
+    const ws = createServer(app)
+
+    ws.listen(port, () => {
       console.log(`> Server now running at http://localhost:${port}`)
+
+      new SubscriptionServer(
+        {
+          execute,
+          subscribe,
+          schema
+        },
+        {
+          server: ws,
+          path: '/subscriptions'
+        }
+      )
     })
   })
+
+// app.listen(port, err => {
+//   if (err) throw err
+// })
