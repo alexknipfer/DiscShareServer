@@ -5,6 +5,7 @@ const Disc = `
     locationDescription: String
     location: Location
     nameOnDisc: String
+    discImage: String
   }
 `
 
